@@ -11,10 +11,10 @@
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/profile_image"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_margin="10dp"
-        android:elevation="5dp"
+        android:elevation="8dp"
         android:src="@drawable/user1"/>
     <TextView
         android:id="@+id/username"
@@ -38,6 +38,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
         android:textAlignment="center">
         <LinearLayout
@@ -63,10 +65,10 @@
                 android:layout_marginTop="10dp"
                 android:text="FOLLOWERS" />
         </LinearLayout>
-        <view
-            android:layout_width="0.7dp"
-            android:layout_height="15dp"
-            android:background="@color/colorAccent"/>
+        <!--<view-->
+            <!--android:layout_width="0.7dp"-->
+            <!--android:layout_height="15dp"-->
+            <!--android:background="@color/colorAccent"/>-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,7 +82,7 @@
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:layout_alignParentTop="true"
-                android:text="200" />
+                android:text="22" />
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -88,12 +90,12 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorAccent"
                 android:layout_marginTop="10dp"
-                android:text="FOLLOWERS" />
+                android:text="FOLLOWING" />
         </LinearLayout>
-        <view
-            android:layout_width="0.7dp"
-            android:layout_height="15dp"
-            android:background="@color/colorAccent"/>
+        <!--<view-->
+            <!--android:layout_width="0.7dp"-->
+            <!--android:layout_height="15dp"-->
+            <!--android:background="@color/colorAccent"/>-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -107,7 +109,7 @@
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:layout_alignParentTop="true"
-                android:text="200" />
+                android:text="19" />
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -115,7 +117,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorAccent"
                 android:layout_marginTop="10dp"
-                android:text="FOLLOWERS" />
+                android:text="PUBLIC REPOS" />
         </LinearLayout>
     </LinearLayout>
 
