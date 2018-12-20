@@ -18,4 +18,3 @@
         android:text="Launch detail activity"
         android:onClick="launchDetailActivity"/>
 </android.support.constraint.ConstraintLayout>
-
