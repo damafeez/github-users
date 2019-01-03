@@ -9,12 +9,12 @@ import java.util.List;
 public class GithubUsersResponse {
     @SerializedName("items")
     @Expose
-    List<GithubUsers> githubUsers;
+    List<GithubUser> githubUsers;
     public GithubUsersResponse() {
-        githubUsers = new ArrayList<GithubUsers>();
+        githubUsers = new ArrayList<GithubUser>();
     }
 
-    public List<GithubUsers> getGithubUsers() {
+    public List<GithubUser> getGithubUsers() {
         return githubUsers;
     }
 }

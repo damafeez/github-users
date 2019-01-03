@@ -1,7 +1,7 @@
 package com.example.afeezawoyemi.githubusers.presenter;
 
 import com.example.afeezawoyemi.githubusers.GithubUsersView;
-import com.example.afeezawoyemi.githubusers.model.GithubUsers;
+import com.example.afeezawoyemi.githubusers.model.GithubUser;
 import com.example.afeezawoyemi.githubusers.model.GithubUsersResponse;
 import com.example.afeezawoyemi.githubusers.services.GithubUsersService;
 
@@ -31,7 +31,7 @@ public class GithubPresenter {
                 public void onResponse(Call<GithubUsersResponse> call, Response<GithubUsersResponse> response) {
                     GithubUsersResponse data = response.body();
                     if (data != null && data.getGithubUsers() != null) {
-                        List<GithubUsers> result = data.getGithubUsers();
+                        List<GithubUser> result = data.getGithubUsers();
                         githubUsersView.githubUsersReady(result);
                     }
                 }
