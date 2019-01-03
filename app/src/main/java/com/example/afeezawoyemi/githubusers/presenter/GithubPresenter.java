@@ -35,8 +35,6 @@ public class GithubPresenter {
                     GithubUsersResponse data = response.body();
                     if (data != null && data.getGithubUsers() != null) {
                         List<GithubUser> result = data.getGithubUsers();
-                        Log.d("QWER", "onResponse() returned: " + result);
-
                         githubUsersView.githubUsersReady(result);
                     }
                 }
