@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import com.example.afeezawoyemi.githubusers.model.GithubUser;
 import com.example.afeezawoyemi.githubusers.presenter.GithubPresenter;
 import com.example.afeezawoyemi.githubusers.adapter.GithubAdapter;
+import com.example.afeezawoyemi.githubusers.model.GithubUser;
+import com.example.afeezawoyemi.githubusers.presenter.GithubPresenter;
 
 import java.util.List;
 public class MainActivity extends AppCompatActivity implements GithubUsersView{
