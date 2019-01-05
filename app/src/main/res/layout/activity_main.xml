@@ -17,5 +17,4 @@
         android:layout_height="wrap_content"
         android:text="Launch detail activity"
         android:onClick="launchDetailActivity"/>
-
 </android.support.constraint.ConstraintLayout>
