@@ -17,7 +17,7 @@ default_platform(:android)
 
 platform :android do
   before_all do
-    ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
+    ENV["SLACK_URL"] = ENV["GITHUB_USERS_SLACK_URL"]
     slack(message:"Github Users::: process started")
    end
 
@@ -33,6 +33,24 @@ platform :android do
   
     # sh "your_script.sh"
     # You can also use other beta testing services here
+  end
+
+  desc "Build and upload APK to Slack"
+  lane :slackbuild do
+    gradle(task: "assembleRelease")
+    slack(message: "Build Successful!")
+    upload_to_slack()
+  end
+
+  # web source:: https://android.jlelse.eu/fastlane-your-android-app-build-and-upload-apk-to-slack-1a3e20cf6f8c
+  desc "Upload the APK to Slack channel"
+  private_lane :upload_to_slack do |options|
+    file_path = lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
+    file_name = file_path.gsub(/\/.*\//,"")
+    token = ENV["GITHUB_USERS_SLACK_TOKEN"]
+    channel = ENV["GITHUB_USERS_SLACK_CHANNEL"]
+    sh "echo Uploading " + file_name + " to Slack"
+    sh "curl https://slack.com/api/files.upload -F token=\"" + token + "\" -F channels=\"" + channel + "\" -F title=\"" + file_name + "\" -F filename=\"" + file_name + "\" -F file=@" + file_path
   end
 
   desc "Deploy a new version to the Google Play"
