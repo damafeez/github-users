@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements GithubUsersView{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         presenter = new GithubPresenter(this);
-        userListRecycler = (RecyclerView) findViewById(R.id.rv_users);
+        userListRecycler = findViewById(R.id.rv_users);
         presenter.getUsers();
     }
 
