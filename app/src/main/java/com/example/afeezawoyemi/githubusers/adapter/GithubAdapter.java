@@ -23,11 +23,13 @@ public class GithubAdapter extends RecyclerView.Adapter<GithubAdapter.ViewHolder
         public ImageView userImage;
         public TextView username;
         public View userListItem;
+        public ImageView shareButton;
 
         public ViewHolder(View listItem) {
             super(listItem);
             userImage = listItem.findViewById(R.id.userImage);
             username = listItem.findViewById(R.id.username);
+            shareButton = listItem.findViewById(R.id.shareIcon);
             userListItem = listItem;
         }
     }
@@ -63,6 +65,15 @@ public class GithubAdapter extends RecyclerView.Adapter<GithubAdapter.ViewHolder
                 Intent showDetailActivity = new Intent(context, DetailActivity.class);
                 showDetailActivity.putExtra("username", usernameString);
                 context.startActivity(showDetailActivity);
+            }
+        });
+        viewHolder.shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            Intent profileShareIntent = new Intent(Intent.ACTION_SEND);
+            profileShareIntent.setType("text/plain");
+            profileShareIntent.putExtra(Intent.EXTRA_TEXT, "Check out this awesome developer @" + usernameString + ", https://github.com/" + usernameString + ".");
+            context.startActivity(Intent.createChooser(profileShareIntent, "Share profile using"));
             }
         });
     }
