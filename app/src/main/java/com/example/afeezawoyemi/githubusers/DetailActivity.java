@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,13 +14,14 @@ import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity implements UserProfileView {
 
+    private String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        String username = intent.getStringExtra("username");
+        username = intent.getStringExtra("username");
         GithubUserProfilePresenter presenter = new GithubUserProfilePresenter(this);
         presenter.getUserProfile(username, getString(R.string.github_client_id), getString(R.string.github_client_secret));
     }
@@ -48,5 +50,11 @@ public class DetailActivity extends AppCompatActivity implements UserProfileView
         Picasso.with(this).load(githubUserProfile.getProfileImage())
                 .placeholder(R.drawable.placeholder).into(userImage);
 
+    }
+    public void shareProfile(View view) {
+        Intent profileShareIntent = new Intent(Intent.ACTION_SEND);
+        profileShareIntent.setType("text/plain");
+        profileShareIntent.putExtra(Intent.EXTRA_TEXT, "Check out this awesome developer @" + username + ", https://github.com/" + username + ".");
+        startActivity(Intent.createChooser(profileShareIntent, "Share profile using"));
     }
 }
