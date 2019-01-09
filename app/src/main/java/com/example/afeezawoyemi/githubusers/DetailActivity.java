@@ -1,8 +1,10 @@
 package com.example.afeezawoyemi.githubusers;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,11 +17,14 @@ import com.squareup.picasso.Picasso;
 public class DetailActivity extends AppCompatActivity implements UserProfileView {
 
     private String username;
+    private Toolbar appToolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
+        appToolbar = findViewById(R.id.action_bar);
+        appToolbar.setTitleTextColor(Color.GRAY);
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         GithubUserProfilePresenter presenter = new GithubUserProfilePresenter(this);
