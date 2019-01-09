@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/userListLayout"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:padding="10dp"
@@ -10,12 +11,10 @@
 
     <ImageView
         android:id="@+id/userImage"
-        android:contentDescription="user image"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:elevation="20dp"
-        android:background="@drawable/image_shadow"
-        app:srcCompat="@drawable/user1" />
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:elevation="8dp"
+        android:background="@drawable/image_shadow" />
 
     <TextView
         android:id="@+id/username"
@@ -24,9 +23,9 @@
         android:layout_weight="1"
         android:layout_marginStart="25dp"
         android:layout_marginLeft="25dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="Damafeez" />
+        android:textSize="18sp"
+        android:letterSpacing="0.065"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/shareIcon"

@@ -2,7 +2,7 @@ package com.example.afeezawoyemi.githubusers.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class GithubUsers {
+public class GithubUser {
     @SerializedName("login")
     String username;
 

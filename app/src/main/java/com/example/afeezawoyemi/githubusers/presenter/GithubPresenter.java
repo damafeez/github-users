@@ -1,7 +1,9 @@
 package com.example.afeezawoyemi.githubusers.presenter;
 
+import android.util.Log;
+
 import com.example.afeezawoyemi.githubusers.GithubUsersView;
-import com.example.afeezawoyemi.githubusers.model.GithubUsers;
+import com.example.afeezawoyemi.githubusers.model.GithubUser;
 import com.example.afeezawoyemi.githubusers.model.GithubUsersResponse;
 import com.example.afeezawoyemi.githubusers.services.GithubUsersService;
 
@@ -10,6 +12,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 public class GithubPresenter {
     private GithubUsersView githubUsersView;
@@ -31,7 +34,9 @@ public class GithubPresenter {
                 public void onResponse(Call<GithubUsersResponse> call, Response<GithubUsersResponse> response) {
                     GithubUsersResponse data = response.body();
                     if (data != null && data.getGithubUsers() != null) {
-                        List<GithubUsers> result = data.getGithubUsers();
+                        List<GithubUser> result = data.getGithubUsers();
+                        Log.d("QWER", "onResponse() returned: " + result);
+
                         githubUsersView.githubUsersReady(result);
                     }
                 }
@@ -39,9 +44,10 @@ public class GithubPresenter {
                 @Override
                 public void onFailure(Call<GithubUsersResponse> call, Throwable t) {
                     try {
-                        throw new InterruptedException("Something went wrong!");
+                        throw new InterruptedException("An error occurred");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
+                        Log.d("QWER", "onFailure: " + t);
                     }
                 }
             });
