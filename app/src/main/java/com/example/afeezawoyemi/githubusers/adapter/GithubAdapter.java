@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +17,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import static android.content.ContentValues.TAG;
-
 public class GithubAdapter extends RecyclerView.Adapter<GithubAdapter.ViewHolder> {
     Context context;
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -29,14 +26,13 @@ public class GithubAdapter extends RecyclerView.Adapter<GithubAdapter.ViewHolder
 
         public ViewHolder(View listItem) {
             super(listItem);
-            userImage = (ImageView) listItem.findViewById(R.id.userImage);
-            username = (TextView) listItem.findViewById(R.id.username);
+            userImage = listItem.findViewById(R.id.userImage);
+            username = listItem.findViewById(R.id.username);
             userListItem = listItem;
         }
     }
 
     private List<GithubUser> githubUsers;
-//    private
 
     public GithubAdapter(List<GithubUser> users) {
         githubUsers = users;
@@ -57,22 +53,22 @@ public class GithubAdapter extends RecyclerView.Adapter<GithubAdapter.ViewHolder
         GithubUser githubUser = githubUsers.get(position);
         ImageView userImage = viewHolder.userImage;
         TextView username = viewHolder.username;
+        final String usernameString = githubUser.getUsername();
         Picasso.with(context).load(githubUser.getProfileImage())
                 .placeholder(R.drawable.placeholder).into(userImage);
-        username.setText(githubUser.getUsername());
-        viewHolder.userListItem.setOnClickListener(launchDetailActivity);
+        username.setText(usernameString);
+        viewHolder.userListItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent showDetailActivity = new Intent(context, DetailActivity.class);
+                showDetailActivity.putExtra("username", usernameString);
+                context.startActivity(showDetailActivity);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return githubUsers.size();
     }
-
-    public View.OnClickListener launchDetailActivity = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent showDetailActivity = new Intent(context, DetailActivity.class);
-            context.startActivity(showDetailActivity);
-        }
-    };
 }

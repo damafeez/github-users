@@ -22,8 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_margin="20dp"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="Damafeez" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/bio"
@@ -33,8 +32,7 @@
         android:layout_marginBottom="20dp"
         android:textSize="18sp"
         android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:text="This is my profile it’s supposed to speak about me pecause it’s my bio and I like it because of lorem ipsum and ipsum lorem is the name of my favorite Github repo." />
+        android:textColor="@color/colorAccent" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,7 +52,8 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:text="200" />
+                android:layout_alignParentTop="true"
+                android:id="@+id/followers" />
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -80,7 +79,8 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:text="22" />
+                android:layout_alignParentTop="true"
+                android:id="@+id/following" />
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -106,7 +106,8 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:text="19" />
+                android:layout_alignParentTop="true"
+                android:id="@+id/repos" />
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
