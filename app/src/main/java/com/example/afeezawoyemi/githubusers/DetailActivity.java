@@ -19,6 +19,7 @@ public class DetailActivity extends AppCompatActivity implements UserProfileView
     private String username;
     private Toolbar appToolbar;
     private ProgressDialog progressDialog;
+    private GithubUserProfile githubUserProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -31,14 +32,21 @@ public class DetailActivity extends AppCompatActivity implements UserProfileView
         username = intent.getStringExtra("username");
         progressDialog.setMessage("Please hold on, where fetching " + username + "'s profile.");
         progressDialog.setCancelable(false);
-        progressDialog.show();
         GithubUserProfilePresenter presenter = new GithubUserProfilePresenter(this);
-        presenter.getUserProfile(username, getString(R.string.github_client_id), getString(R.string.github_client_secret));
+        if (savedInstanceState == null) {
+            presenter.getUserProfile(username, getString(R.string.github_client_id), getString(R.string.github_client_secret));
+            progressDialog.show();
+        }
     }
 
     @Override
-    public void userProfileReady(GithubUserProfile githubUserProfile) {
+    public void userProfileReady(GithubUserProfile user) {
+        githubUserProfile = user;
+        displayUser();
 
+    }
+
+    private void displayUser() {
         setContentView(R.layout.activity_detail);
         ImageView userImage = findViewById(R.id.profile_image);
         TextView username = findViewById(R.id.username);
@@ -60,12 +68,27 @@ public class DetailActivity extends AppCompatActivity implements UserProfileView
         Picasso.with(this).load(githubUserProfile.getProfileImage())
                 .placeholder(R.drawable.placeholder).into(userImage);
         progressDialog.dismiss();
-
     }
+
     public void shareProfile(View view) {
         Intent profileShareIntent = new Intent(Intent.ACTION_SEND);
         profileShareIntent.setType("text/plain");
         profileShareIntent.putExtra(Intent.EXTRA_TEXT, "Check out this awesome developer @" + username + ", https://github.com/" + username + ".");
         startActivity(Intent.createChooser(profileShareIntent, "Share profile using"));
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("user", githubUserProfile);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState != null && savedInstanceState.containsKey("user")) {
+            githubUserProfile = savedInstanceState.getParcelable("user");
+            displayUser();
+        }
     }
 }
