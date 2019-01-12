@@ -3,6 +3,7 @@ package com.example.afeezawoyemi.githubusers;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.afeezawoyemi.githubusers.model.GithubUserProfile;
 import com.example.afeezawoyemi.githubusers.presenter.GithubUserProfilePresenter;
+import com.example.afeezawoyemi.githubusers.util.ConnectionManager;
 import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity implements UserProfileView {
@@ -35,8 +37,17 @@ public class DetailActivity extends AppCompatActivity implements UserProfileView
         GithubUserProfilePresenter presenter = new GithubUserProfilePresenter(this);
         if (savedInstanceState == null) {
             presenter.getUserProfile(username, getString(R.string.github_client_id), getString(R.string.github_client_secret));
-            progressDialog.show();
         }
+    }
+
+    @Override
+    public void showDialog() {
+        progressDialog.show();
+    }
+
+    @Override
+    public void hideDialog() {
+        progressDialog.dismiss();
     }
 
     @Override
@@ -44,6 +55,17 @@ public class DetailActivity extends AppCompatActivity implements UserProfileView
         githubUserProfile = user;
         displayUser();
 
+    }
+
+    @Override
+    public void showErrorSnackBar() {
+        Snackbar.make(appToolbar, "Internet connection error, please check your network", Snackbar.LENGTH_LONG)
+                .show();
+    }
+
+    @Override
+    public boolean isNetworkConnected() {
+        return ConnectionManager.isConnected(this);
     }
 
     private void displayUser() {
@@ -67,7 +89,6 @@ public class DetailActivity extends AppCompatActivity implements UserProfileView
         }
         Picasso.with(this).load(githubUserProfile.getProfileImage())
                 .placeholder(R.drawable.placeholder).into(userImage);
-        progressDialog.dismiss();
     }
 
     public void shareProfile(View view) {

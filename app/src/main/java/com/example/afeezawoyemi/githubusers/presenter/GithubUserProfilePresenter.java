@@ -1,6 +1,5 @@
 package com.example.afeezawoyemi.githubusers.presenter;
 
-
 import com.example.afeezawoyemi.githubusers.UserProfileView;
 import com.example.afeezawoyemi.githubusers.model.GithubUserProfile;
 import com.example.afeezawoyemi.githubusers.services.GithubUsersService;
@@ -22,29 +21,36 @@ public class GithubUserProfilePresenter {
     }
 
     public void getUserProfile(String username, String clientId, String clientSecret) {
-        this.githubUsersService
-                .gihubAPI()
-                .getUserProfile(username, clientId, clientSecret)
-                .enqueue(new Callback<GithubUserProfile>() {
-                    @Override
-                    public void onResponse(Call<GithubUserProfile> call, Response<GithubUserProfile> response) {
-                        GithubUserProfile data = response.body();
+        if (userProfileView.isNetworkConnected()) {
+            userProfileView.showDialog();
+            this.githubUsersService
+                    .gihubAPI()
+                    .getUserProfile(username, clientId, clientSecret)
+                    .enqueue(new Callback<GithubUserProfile>() {
+                        @Override
+                        public void onResponse(Call<GithubUserProfile> call, Response<GithubUserProfile> response) {
+                            GithubUserProfile data = response.body();
 
-                        if (data != null && data.getProfileImage() != null) {
-                            GithubUserProfile result = data;
+                            if (data != null && data.getProfileImage() != null) {
+                                GithubUserProfile result = data;
 
-                            userProfileView.userProfileReady(result);
+                                userProfileView.userProfileReady(result);
+                                userProfileView.hideDialog();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<GithubUserProfile> call, Throwable t) {
-                        try {
-                            throw new InterruptedException("An error occurred");
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                        @Override
+                        public void onFailure(Call<GithubUserProfile> call, Throwable t) {
+                            userProfileView.hideDialog();
+                            try {
+                                throw new InterruptedException("An error occurred");
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
-                });
+                    });
+        } else {
+            userProfileView.showErrorSnackBar();
+        }
     }
 }

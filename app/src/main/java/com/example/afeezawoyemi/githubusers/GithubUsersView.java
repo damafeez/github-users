@@ -6,4 +6,7 @@ import java.util.List;
 
 public interface GithubUsersView {
     void githubUsersReady(List<GithubUser> usersList);
+    void showErrorSnackBar();
+    void switchRefreshState(Boolean state);
+    boolean isNetworkConnected();
 }
