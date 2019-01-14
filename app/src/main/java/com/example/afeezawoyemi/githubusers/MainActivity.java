@@ -12,6 +12,7 @@ import com.example.afeezawoyemi.githubusers.model.GithubUser;
 import com.example.afeezawoyemi.githubusers.presenter.GithubPresenter;
 
 import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements GithubUsersView{
     private GithubPresenter presenter;
     private RecyclerView userListRecycler;
