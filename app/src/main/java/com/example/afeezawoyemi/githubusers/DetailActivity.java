@@ -1,9 +1,11 @@
 package com.example.afeezawoyemi.githubusers;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,21 +17,29 @@ import com.squareup.picasso.Picasso;
 public class DetailActivity extends AppCompatActivity implements UserProfileView {
 
     private String username;
+    private Toolbar appToolbar;
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
+        appToolbar = findViewById(R.id.action_bar);
+        appToolbar.setTitleTextColor(Color.GRAY);
+        progressDialog = new ProgressDialog(this);
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
+        progressDialog.setMessage("Please hold on, where fetching " + username + "'s profile.");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         GithubUserProfilePresenter presenter = new GithubUserProfilePresenter(this);
         presenter.getUserProfile(username, getString(R.string.github_client_id), getString(R.string.github_client_secret));
     }
 
     @Override
     public void userProfileReady(GithubUserProfile githubUserProfile) {
-        setContentView(R.layout.activity_detail);
 
+        setContentView(R.layout.activity_detail);
         ImageView userImage = findViewById(R.id.profile_image);
         TextView username = findViewById(R.id.username);
         TextView bio = findViewById(R.id.bio);
@@ -49,6 +59,7 @@ public class DetailActivity extends AppCompatActivity implements UserProfileView
         }
         Picasso.with(this).load(githubUserProfile.getProfileImage())
                 .placeholder(R.drawable.placeholder).into(userImage);
+        progressDialog.dismiss();
 
     }
     public void shareProfile(View view) {

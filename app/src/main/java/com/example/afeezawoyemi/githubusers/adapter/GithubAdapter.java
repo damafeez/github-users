@@ -45,7 +45,7 @@ public class GithubAdapter extends RecyclerView.Adapter<GithubAdapter.ViewHolder
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View githubUserView = inflater.inflate(R.layout.list_item, parent, false);
+        View githubUserView = inflater.inflate(R.layout.list_item_grid, parent, false);
         ViewHolder viewHolder = new ViewHolder(githubUserView);
         return viewHolder;
     }
