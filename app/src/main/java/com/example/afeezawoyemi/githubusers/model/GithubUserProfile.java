@@ -30,6 +30,22 @@ public class GithubUserProfile implements Parcelable {
         publicRepos = in.readString();
     }
 
+    public GithubUserProfile(
+            String username,
+            String profileImage,
+            String followers,
+            String following,
+            String bio,
+            String publicRepos
+    ) {
+        this.username = username;
+        this.profileImage = profileImage;
+        this.followers = followers;
+        this.following = following;
+        this.bio = bio;
+        this.publicRepos = publicRepos;
+    }
+
     public static final Creator<GithubUserProfile> CREATOR = new Creator<GithubUserProfile>() {
         @Override
         public GithubUserProfile createFromParcel(Parcel in) {
