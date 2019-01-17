@@ -1,8 +1,11 @@
 package com.example.afeezawoyemi.githubusers.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class GithubUserProfile {
+public class GithubUserProfile implements Parcelable {
     @SerializedName("login")
     String username;
 
@@ -17,6 +20,27 @@ public class GithubUserProfile {
 
     @SerializedName("public_repos")
     String publicRepos;
+
+    protected GithubUserProfile(Parcel in) {
+        username = in.readString();
+        profileImage = in.readString();
+        followers = in.readString();
+        following = in.readString();
+        bio = in.readString();
+        publicRepos = in.readString();
+    }
+
+    public static final Creator<GithubUserProfile> CREATOR = new Creator<GithubUserProfile>() {
+        @Override
+        public GithubUserProfile createFromParcel(Parcel in) {
+            return new GithubUserProfile(in);
+        }
+
+        @Override
+        public GithubUserProfile[] newArray(int size) {
+            return new GithubUserProfile[size];
+        }
+    };
 
     public String getUsername() {
         return  username;
@@ -39,5 +63,20 @@ public class GithubUserProfile {
 
     public String getBio() {
         return bio;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(username);
+        dest.writeString(profileImage);
+        dest.writeString(followers);
+        dest.writeString(following);
+        dest.writeString(bio);
+        dest.writeString(publicRepos);
     }
 }

@@ -1,5 +1,7 @@
 package com.example.afeezawoyemi.githubusers.presenter;
 
+import android.util.Log;
+
 import com.example.afeezawoyemi.githubusers.GithubUsersView;
 import com.example.afeezawoyemi.githubusers.model.GithubUser;
 import com.example.afeezawoyemi.githubusers.model.GithubUsersResponse;
