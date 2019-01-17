@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Github Users</string>
+    <string name="network_error_message">"Internet connection error, please check your network"</string>
 </resources>

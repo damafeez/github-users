@@ -22,6 +22,15 @@ android {
             testCoverageEnabled true
         }
     }
+
+    testOptions {
+        execution 'ANDROID_TEST_ORCHESTRATOR'
+        animationsDisabled true
+
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -38,7 +47,10 @@ dependencies {
     testImplementation "org.powermock:powermock-api-mockito:$rootProject.powerMockito"
     androidTestImplementation "com.android.support.test:runner:$rootProject.testRunnerVersion"
     androidTestImplementation "com.android.support.test:rules:$rootProject.testRulesVersion"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.espressoCoreVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.espressoVerion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.espressoVerion"
+    androidTestUtil "com.android.support.test:orchestrator:$rootProject.testOchestrator"
+
     implementation "de.hdodenhof:circleimageview:$rootProject.circleImageViewVersion"
     implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"

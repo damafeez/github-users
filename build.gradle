@@ -36,10 +36,11 @@ ext {
     hamcrestVersion = '1.3'
     testRunnerVersion = '1.0.2'
     testRulesVersion = '1.0.2'
-    espressoCoreVersion = '3.0.2'
+    espressoVerion = '3.0.2'
     circleImageViewVersion = '2.2.0'
     gsonVersion = '2.8.5'
     retrofitVersion = '2.4.0'
     retrofitConverterGsonVersion = '2.4.0'
     picassoVersion = '2.5.2'
+    testOchestrator = '1.0.2'
 }

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements GithubUsersView, 
 
     @Override
     public void showErrorSnackBar() {
-        Snackbar.make(userListRecycler, "Internet connection error, please check your network", Snackbar.LENGTH_LONG)
+        Snackbar.make(userListRecycler, R.string.network_error_message, Snackbar.LENGTH_LONG)
                 .show();
     }
 
